@@ -1,5 +1,7 @@
 package mypackage;
 
+import java.io.IOException;
+
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;
@@ -10,7 +12,7 @@ import net.rim.device.api.ui.component.ButtonField;
 import net.rim.device.api.ui.component.Dialog;
 import net.rim.device.api.ui.container.MainScreen;
 
-public class HomeScreen extends MainScreen{
+public class HomeScreen extends BaseScreen{
 
 	
 
@@ -21,12 +23,28 @@ public class HomeScreen extends MainScreen{
     private ButtonField createNewRecordButton  = null;   
     private ButtonField searchButton           = null;
     private ButtonField quitButton             = null;
+    private ButtonField testGetRecordButton    = null;
     
     
     
 	
 	public HomeScreen() {
 		this.setTitle("Welcome to the Credit Calculator!");
+		
+		testGetRecordButton =  new ButtonField("Test");
+        
+		testGetRecordButton.setChangeListener(new FieldChangeListener() {
+        public void fieldChanged(Field field,int context) {
+        	try {
+				Record r = Storage.getInstance().getSingleRecordByCasenumber(new Integer(123));
+				Dialog.alert(r.firstName + " " + r.lastName); //show text from first input field
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            }
+        });
+        this.add(testGetRecordButton);
 		
 		
 	    helpButton =  new ButtonField("Help");

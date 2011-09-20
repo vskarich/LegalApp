@@ -7,18 +7,21 @@ import net.rim.device.api.ui.Screen;
 import net.rim.device.api.ui.component.ButtonField;
 import net.rim.device.api.ui.container.MainScreen;
 
+public class ListRecordsScreen extends BaseScreen {
 
-public class SearchScreen extends BaseScreen {
 
 
 
 		
-		public  String      currentScreenName      = "SearchScreen";
+		public  String      currentScreenName      = "ListRecordsScreen";
 	    private ButtonField homeButton             = null;    
 	    
 	    
-	    public SearchScreen() {
-			this.setTitle("Search Screen");
+	    
+	    
+		
+		public ListRecordsScreen() {
+			this.setTitle("ListRecords Screen");
 			
 			
 			homeButton =  new ButtonField("Home");
@@ -29,12 +32,12 @@ public class SearchScreen extends BaseScreen {
 	            }
 	        });
 	        this.add(homeButton);
+	       
 		
 	}
 
 	
 }
+
 	
-
-
 

@@ -18,6 +18,7 @@ public class ViewObject
   private SearchScreen      searchScreen;
   private RecordScreen      recordScreen;
   private RecordInputScreen recordInputScreen;
+  private ListRecordsScreen listRecordsScreen;
 	 
   private static ViewObject uniqueInstance;
 	 
@@ -44,6 +45,7 @@ public class ViewObject
 	searchScreen      = new SearchScreen();
 	recordScreen      = new RecordScreen();
 	recordInputScreen = new RecordInputScreen();
+	listRecordsScreen = new ListRecordsScreen();
   	  
   	  screenRetriever.put("HomeScreen", homeScreen);
   	  screenRetriever.put("AboutScreen", aboutScreen);
@@ -52,6 +54,7 @@ public class ViewObject
   	  screenRetriever.put("SearchScreen", searchScreen);
   	  screenRetriever.put("RecordInputScreen", recordInputScreen);
   	  screenRetriever.put("RecordScreen", recordScreen);
+  	  screenRetriever.put("ListRecordsScreen", listRecordsScreen);
     }
   
  

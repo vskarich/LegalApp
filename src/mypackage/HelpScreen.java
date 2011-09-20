@@ -7,7 +7,7 @@ import net.rim.device.api.ui.Screen;
 import net.rim.device.api.ui.component.ButtonField;
 import net.rim.device.api.ui.container.MainScreen;
 
-public class HelpScreen extends MainScreen {
+public class HelpScreen extends BaseScreen {
 
 
 		

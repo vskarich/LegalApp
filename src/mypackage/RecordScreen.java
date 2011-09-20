@@ -4,7 +4,7 @@ import net.rim.device.api.ui.Manager;
 import net.rim.device.api.ui.Screen;
 import net.rim.device.api.ui.container.MainScreen;
 
-public class RecordScreen extends MainScreen{
+public class RecordScreen extends BaseScreen {
 
 	public RecordScreen(){
 		
