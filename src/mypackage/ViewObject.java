@@ -9,7 +9,7 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 public class ViewObject
 {
   
-  private Screen            currentScreen;
+  private BaseScreen        currentScreen;
   private Hashtable         screenRetriever;
   private HomeScreen     	homeScreen;
   private AboutScreen    	aboutScreen;
@@ -61,8 +61,11 @@ public class ViewObject
 
   public void updateUsingState( String inState ) {
 	
-    Screen noLongerCurrent = currentScreen;
-    currentScreen = (Screen)screenRetriever.get(inState);
+    BaseScreen noLongerCurrent = currentScreen;
+    currentScreen = (BaseScreen)screenRetriever.get(inState);
+    if(noLongerCurrent != null) {
+    	currentScreen.updateUIOnScreenChange(noLongerCurrent.createNextScreenManager()); //pass some parameters here between old screen and new screen
+    }
     
     if(currentScreen == null) {
       System.exit(0);

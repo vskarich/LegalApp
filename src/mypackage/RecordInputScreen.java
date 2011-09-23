@@ -22,6 +22,7 @@ public class RecordInputScreen extends BaseScreen {
     
     private ButtonField submitButton  = null;    
     private ButtonField homeButton  = null;   
+    private ButtonField clearFieldsButton  = null; 
     
 	
 	public RecordInputScreen() {
@@ -38,6 +39,7 @@ public class RecordInputScreen extends BaseScreen {
 		
     submitButton =  new ButtonField("Submit"); 
     homeButton   =  new ButtonField("Home");
+    clearFieldsButton = new ButtonField("Clear Fields");
     ModelObject.getInstance().addStateTransition("RecordInputScreen", homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
     
     
@@ -61,7 +63,13 @@ public class RecordInputScreen extends BaseScreen {
             ModelObject.getInstance().changeState(homeButton.getLabel());
         }
        });
+    clearFieldsButton.setChangeListener(new FieldChangeListener() {
+        public void fieldChanged(Field field,int context) {
+        	clearFields(context);
+        }
+       });
     this.add(homeButton);
+    this.add(clearFieldsButton);
     
     this.add(caseNumber);
     this.add(firstName);
@@ -73,6 +81,15 @@ public class RecordInputScreen extends BaseScreen {
     
     	
     }
+	
+	public void clearFields(int context) {
+		date1.clear(context);
+        date2.clear(context);
+        caseNumber.clear(context);
+        firstName.clear(context);
+        lastName.clear(context);
+		
+	}
 
 	
 

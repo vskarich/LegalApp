@@ -23,7 +23,7 @@ public class HomeScreen extends BaseScreen{
     private ButtonField createNewRecordButton  = null;   
     private ButtonField searchButton           = null;
     private ButtonField quitButton             = null;
-    private ButtonField testGetRecordButton    = null;
+    private ButtonField listRecordsButton      = null;
     
     
     
@@ -31,20 +31,14 @@ public class HomeScreen extends BaseScreen{
 	public HomeScreen() {
 		this.setTitle("Welcome to the Credit Calculator!");
 		
-		testGetRecordButton =  new ButtonField("Test");
-        
-		testGetRecordButton.setChangeListener(new FieldChangeListener() {
+		listRecordsButton =  new ButtonField("List Records");
+        ModelObject.getInstance().addStateTransition(currentScreenName, listRecordsButton.getLabel(), "ListRecordsScreen"); //update the state machine with correct screen transition 
+        listRecordsButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
-        	try {
-				Record r = Storage.getInstance().getSingleRecordByCasenumber(new Integer(123));
-				Dialog.alert(r.firstName + " " + r.lastName); //show text from first input field
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	ModelObject.getInstance().changeState(listRecordsButton.getLabel());
             }
         });
-        this.add(testGetRecordButton);
+        this.add(listRecordsButton);
 		
 		
 	    helpButton =  new ButtonField("Help");
