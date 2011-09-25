@@ -22,16 +22,10 @@ public class AboutScreen extends BaseScreen {
 		
 		public AboutScreen() {
 			this.setTitle("About Screen");
+			ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().BACK_ACTION, "HomeScreen");
 			
 			
-			homeButton =  new ButtonField("Home");
-	        ModelObject.getInstance().addStateTransition(currentScreenName, homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
-	        homeButton.setChangeListener(new FieldChangeListener() {
-	        public void fieldChanged(Field field,int context) {
-	        	ModelObject.getInstance().changeState(homeButton.getLabel());
-	            }
-	        });
-	        this.add(homeButton);
+			
 		
 	}
 

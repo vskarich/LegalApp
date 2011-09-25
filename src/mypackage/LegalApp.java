@@ -4,12 +4,7 @@ package mypackage;
 
 import java.util.Hashtable;
 
-import net.rim.device.api.database.Database;
-import net.rim.device.api.database.DatabaseFactory;
-import net.rim.device.api.database.DatabaseSecurityOptions;
-import net.rim.device.api.database.Row;
-import net.rim.device.api.database.Statement;
-import net.rim.device.api.io.URI;
+
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.component.LabelField;
 import net.rim.device.api.ui.component.RichTextField;

@@ -2,6 +2,7 @@ package mypackage;
 
 import java.io.IOException;
 
+import net.rim.device.api.system.Characters;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;
@@ -31,7 +32,7 @@ public class HomeScreen extends BaseScreen{
 	public HomeScreen() {
 		this.setTitle("Welcome to the Credit Calculator!");
 		
-		listRecordsButton =  new ButtonField("List Records");
+		listRecordsButton =  new ButtonField("List Records", ButtonField.CONSUME_CLICK);
         ModelObject.getInstance().addStateTransition(currentScreenName, listRecordsButton.getLabel(), "ListRecordsScreen"); //update the state machine with correct screen transition 
         listRecordsButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -41,7 +42,7 @@ public class HomeScreen extends BaseScreen{
         this.add(listRecordsButton);
 		
 		
-	    helpButton =  new ButtonField("Help");
+	    helpButton =  new ButtonField("Help", ButtonField.CONSUME_CLICK);
         ModelObject.getInstance().addStateTransition(currentScreenName, helpButton.getLabel(), "HelpScreen"); //update the state machine with correct screen transition 
         helpButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -50,7 +51,7 @@ public class HomeScreen extends BaseScreen{
         });
         this.add(helpButton);
         
-        settingsButton =  new ButtonField("Settings");
+        settingsButton =  new ButtonField("Settings", ButtonField.CONSUME_CLICK);
         ModelObject.getInstance().addStateTransition(currentScreenName, settingsButton.getLabel(), "SettingsScreen"); //update the state machine with correct screen transition 
         settingsButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -59,7 +60,7 @@ public class HomeScreen extends BaseScreen{
         });
         this.add(settingsButton);
         
-        aboutButton =  new ButtonField("About");
+        aboutButton =  new ButtonField("About", ButtonField.CONSUME_CLICK);
         ModelObject.getInstance().addStateTransition(currentScreenName, aboutButton.getLabel(), "AboutScreen"); //update the state machine with correct screen transition 
         aboutButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -68,7 +69,7 @@ public class HomeScreen extends BaseScreen{
         });
         this.add(aboutButton);
         
-        createNewRecordButton =  new ButtonField("New Record");
+        createNewRecordButton =  new ButtonField("New Record", ButtonField.CONSUME_CLICK);
         ModelObject.getInstance().addStateTransition(currentScreenName, createNewRecordButton.getLabel(), "RecordInputScreen"); //update the state machine with correct screen transition 
         createNewRecordButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -77,7 +78,7 @@ public class HomeScreen extends BaseScreen{
         });
         this.add(createNewRecordButton);
         
-        searchButton =  new ButtonField("Search Records");
+        searchButton =  new ButtonField("Search Records", ButtonField.CONSUME_CLICK);
         ModelObject.getInstance().addStateTransition(currentScreenName, searchButton.getLabel(), "SearchScreen"); //update the state machine with correct screen transition 
         searchButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -86,7 +87,7 @@ public class HomeScreen extends BaseScreen{
         });
         this.add(searchButton);
         
-        quitButton =  new ButtonField("Quit");
+        quitButton =  new ButtonField("Quit", ButtonField.CONSUME_CLICK);
         //Since there is no screen to go to, we do not add anything to the state machine. This will quit the app according to the current implementation of the state machine.
         quitButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
@@ -101,5 +102,15 @@ public class HomeScreen extends BaseScreen{
    
 
 }
+	
+	public boolean keyChar(char key, int status, int time) {
+        //intercept the ESC key - exit the app on its receipt
+        boolean retval = false;
+        if (key == Characters.ESCAPE) {
+        	close();
+            return true;
+        }
+        return super.keyChar(key, status, time); //notice how event propagates here
+    }
 	
 }

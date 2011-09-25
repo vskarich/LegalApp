@@ -20,9 +20,10 @@ public class HelpScreen extends BaseScreen {
 		
 		public HelpScreen() {
 			this.setTitle("Help Screen");
+			ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().BACK_ACTION, "HomeScreen");
 			
 			
-			homeButton =  new ButtonField("Home");
+			homeButton =  new ButtonField("Home", ButtonField.CONSUME_CLICK);
 	        ModelObject.getInstance().addStateTransition(currentScreenName, homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
 	        homeButton.setChangeListener(new FieldChangeListener() {
 	        public void fieldChanged(Field field,int context) {

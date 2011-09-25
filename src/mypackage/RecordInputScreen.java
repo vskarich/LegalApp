@@ -21,12 +21,14 @@ public class RecordInputScreen extends BaseScreen {
     private BasicEditField date2 = null;                   //define the edit fields
     
     private ButtonField submitButton  = null;    
-    private ButtonField homeButton  = null;   
+   
     private ButtonField clearFieldsButton  = null; 
+    public  String      currentScreenName      = "RecordInputScreen";
     
 	
 	public RecordInputScreen() {
 		this.setTitle("Input Screen");
+		ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().BACK_ACTION, "HomeScreen");
 		
 		
 	
@@ -37,10 +39,10 @@ public class RecordInputScreen extends BaseScreen {
 		lastName     =  new BasicEditField("Last Name: ", "", 10, BasicEditField.FILTER_DEFAULT);
 		
 		
-    submitButton =  new ButtonField("Submit"); 
-    homeButton   =  new ButtonField("Home");
-    clearFieldsButton = new ButtonField("Clear Fields");
-    ModelObject.getInstance().addStateTransition("RecordInputScreen", homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
+    submitButton =  new ButtonField("Submit", ButtonField.CONSUME_CLICK); 
+   
+    clearFieldsButton = new ButtonField("Clear Fields", ButtonField.CONSUME_CLICK); 
+   
     
     
 
@@ -56,19 +58,15 @@ public class RecordInputScreen extends BaseScreen {
         	Dialog.alert("Record has been saved."); //show text from first input field
             }
      });
-    this.add(submitButton);
+   
     
-    homeButton.setChangeListener(new FieldChangeListener() {
-        public void fieldChanged(Field field,int context) {
-            ModelObject.getInstance().changeState(homeButton.getLabel());
-        }
-       });
+    
     clearFieldsButton.setChangeListener(new FieldChangeListener() {
         public void fieldChanged(Field field,int context) {
         	clearFields(context);
         }
        });
-    this.add(homeButton);
+    
     this.add(clearFieldsButton);
     
     this.add(caseNumber);
@@ -76,6 +74,7 @@ public class RecordInputScreen extends BaseScreen {
     this.add(lastName);
     this.add(date1);
     this.add(date2);
+    this.add(submitButton);
    
   
     

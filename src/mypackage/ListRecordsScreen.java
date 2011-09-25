@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import net.rim.device.api.collection.util.BigVector;
+import net.rim.device.api.system.Characters;
 import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
@@ -32,17 +33,9 @@ public class ListRecordsScreen extends BaseScreen {
 		public ListRecordsScreen() {
 			this.setTitle("ListRecords Screen");
            
-			
+			ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().BACK_ACTION, "HomeScreen");
             
-            homeButton =  new ButtonField("Home", ButtonField.CONSUME_CLICK);
-	        ModelObject.getInstance().addStateTransition(currentScreenName, homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
-	        homeButton.setChangeListener(new FieldChangeListener() {
-	        public void fieldChanged(Field field,int context) {
-	        	ModelObject.getInstance().changeState(homeButton.getLabel());
-	            }
-	        });
-	        this.add(homeButton);
-	        ModelObject.getInstance().addStateTransition(currentScreenName, "VIEW_INDIVDUAL_RECORD", "RecordScreen");
+	        ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().VIEW_RECORD_ACTION, "RecordScreen");
 	        
 	        
 	        _listElements = new Vector(); 
@@ -78,6 +71,8 @@ public class ListRecordsScreen extends BaseScreen {
 		    _listField.setSize(_listElements.size());
 		}
 		
+		
+		
 	   public VerticalFieldManager initializeVerticalFieldManager(Record record) {
 		   VerticalFieldManager manager = new VerticalFieldManager();
 		   manager.add(new LabelField("First Name: " + record.getFirstName()));
@@ -93,12 +88,16 @@ public class ListRecordsScreen extends BaseScreen {
 	   }
 	   protected boolean navigationClick(int status, int time)
 	   {
-	   int selectedindex = _listField.getSelectedIndex();
-	   Record record = (Record)recordslist.elementAt(selectedindex);
+		   int selectedindex = _listField.getSelectedIndex();
+		   if(selectedindex != -1) {
+			   Record record = (Record)recordslist.elementAt(selectedindex);
 	   
-	   this.currentRecordScreenManager = initializeVerticalFieldManager(record);
-	   ModelObject.getInstance().changeState("VIEW_INDIVDUAL_RECORD"); 
-	   return true;
+			   this.currentRecordScreenManager = initializeVerticalFieldManager(record);
+			   ModelObject.getInstance().changeState("VIEW_INDIVDUAL_RECORD"); 
+			   return true;
+	   
+		   }
+		   return false;
 	   }
 	   
 	   public Manager createNextScreenManager(){ //called when navigating to specific record screen

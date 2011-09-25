@@ -1,5 +1,6 @@
 package mypackage;
 
+import net.rim.device.api.system.Characters;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FieldChangeListener;
 import net.rim.device.api.ui.Manager;
@@ -10,10 +11,6 @@ import net.rim.device.api.ui.container.VerticalFieldManager;
 
 public class RecordScreen extends BaseScreen {
 
-
-
-
-		
 		public  String      currentScreenName      = "RecordScreen";
 	    private ButtonField homeButton             = null;    
 	    private VerticalFieldManager manager       = null;
@@ -23,17 +20,19 @@ public class RecordScreen extends BaseScreen {
 		
 		public RecordScreen() {
 			this.setTitle("Record Screen");
+			ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().BACK_ACTION, "ListRecordsScreen");
 			
-			homeButton =  new ButtonField("Home");
-	        ModelObject.getInstance().addStateTransition(currentScreenName, homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
-	        homeButton.setChangeListener(new FieldChangeListener() {
-	        public void fieldChanged(Field field,int context) {
-	        	ModelObject.getInstance().changeState(homeButton.getLabel());
-	            }
-	        });
-	        this.add(homeButton);
 	        
 		
+	    }
+		public boolean keyChar(char key, int status, int time) {
+	        //intercept the ESC key - exit the app on its receipt
+	        boolean retval = false;
+	        if (key == Characters.ESCAPE) {
+	        	ModelObject.getInstance().changeState(Config.getInstance().BACK_ACTION);
+	            return true;
+	        }
+	        return super.keyChar(key, status, time); //notice how event propagates here
 	    }
 		
 		public void updateUIOnScreenChange(Manager manager){

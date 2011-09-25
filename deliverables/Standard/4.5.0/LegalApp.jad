@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 RIM-COD-Module-Name: LegalApp
 RIM-COD-Module-Dependencies: net_rim_cldc
-MIDlet-Jar-Size: 40189
+MIDlet-Jar-Size: 35969
 MIDlet-1: ,img/icon.png,
-RIM-COD-Creation-Time: 1316837455
+RIM-COD-Creation-Time: 1316906106
 MIDlet-Jar-URL: LegalApp.jar
 RIM-COD-URL: LegalApp.cod
-RIM-COD-SHA1: 52 e6 83 b7 b1 0f c5 89 2f 7c 18 22 f1 fe 5b 1e 1f 76 ae ea
-RIM-COD-Size: 12936
+RIM-COD-SHA1: 3a ec a6 c7 06 73 b1 e8 6a 12 80 91 f9 0c c8 ab cd ea e6 c0
+RIM-COD-Size: 12244
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-Version: 1.0.0
 MIDlet-Name: LegalApp

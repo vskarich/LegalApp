@@ -23,14 +23,7 @@ public class SettingsScreen extends BaseScreen {
 			this.setTitle("Settings Screen");
 			
 			
-			homeButton =  new ButtonField("Home");
-	        ModelObject.getInstance().addStateTransition(currentScreenName, homeButton.getLabel(), "HomeScreen"); //update the state machine with correct screen transition 
-	        homeButton.setChangeListener(new FieldChangeListener() {
-	        public void fieldChanged(Field field,int context) {
-	        	ModelObject.getInstance().changeState(homeButton.getLabel());
-	            }
-	        });
-	        this.add(homeButton);
+			ModelObject.getInstance().addStateTransition(currentScreenName, Config.getInstance().BACK_ACTION, "HomeScreen");
 		
 	}
 
